@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "Capstone",
+    "version": "0.1",
+    "description": "Uses the chrome.declarativeNetRequest API to block requests.",
+    "content_scripts": [{
+        "js": ["script.js"],
+        "matches": ["http://*/*", "https://*/*"]
+    }],
+    "background": {
+        "service_worker": "script.js"
+        },
+    "browser_action": {
+        "default_popup": "options.html"
+    },
+    "declarative_net_request": {
+    "rule_resources": [
+        {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules_1.json"
+        }
+    ]
+    },
+    "permissions": ["declarativeNetRequest", "declarativeNetRequestFeedback", "tabs", "storage"]
+}
