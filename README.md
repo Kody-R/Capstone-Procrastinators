@@ -1,1 +1,3 @@
 # Capstone-Procrastinators
+
+The Web-Extension module is hardcoded to block youtube by partial and full domain name as well as through keyword searches. It will redirect to google.com currently once youtube's domain name is searched and once it is google.com will appear in place of the youtube search. Currently the blocklist is set through a defined list in the code base which can be expanded upon or reduced to nothing if desired. 
