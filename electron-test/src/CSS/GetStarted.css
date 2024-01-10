@@ -1,0 +1,29 @@
+
+/* Exo 2 font */
+/* @import url('https://fonts.googleapis.com/css2?family=Exo+2&family=Lato&display=swap'); */
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('../fonts/Exo2-VariableFont_wght.ttf') format('truetype');
+}
+
+body {
+    justify-content: center;
+    text-align: center;
+    background-color: navy;
+    color: snow;    
+    font-family: 'Exo 2';
+}
+
+h1 {
+    font-family: 'Exo 2';
+}
+
+.test {
+    margin: auto;
+}
+
+.buttonFlexBox {
+    display: flex;
+    justify-content: center;
+}
