@@ -22,5 +22,5 @@
         }
     ]
     },
-    "permissions": []
+    "permissions": ["activeTabs"]
 }
