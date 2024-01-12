@@ -1,0 +1,72 @@
+html, body {
+    margin: 0px;
+    height: 100%;
+}
+
+.background {
+    background: linear-gradient(0deg, black, purple);
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.mobile-select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.continue {
+    width: 100px;
+    height: 80px;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.title-text {
+    -webkit-animation: movingTitleText 3s;
+    animation: movingTitleText 3s;
+    font-family: "Lucida Console";
+    color: gold;
+    position: relative;
+    text-align: center;
+    font-size: 40px;
+}
+
+.smaller-title-text {
+    -webkit-animation: movingTitleText 3s;
+    animation: movingTitleText 3s;
+    font-family: "Lucida Console";
+    color: gold;
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+}
+
+.code-input {
+    width: 40px;
+    height: 40px;
+    background-color: grey;
+    text-align: center;
+    color: black;
+    font-family: "Lucida Console";
+    font-size: 25px;
+}
+
+.code-input::-webkit-inner-spin-button,
+.code-input::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@keyframes movingTitleText {
+    from {transform: translateY(450px);
+        opacity: 0;
+    }
+    to {transform: translateY(0px);
+        opacity: 1;
+    }
+}
