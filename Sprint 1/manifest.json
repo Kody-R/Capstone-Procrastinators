@@ -22,5 +22,5 @@
         }
     ]
     },
-    "permissions": ["declarativeNetRequest", "declarativeNetRequestFeedback", "tabs", "storage"]
+    "permissions": []
 }
