@@ -5,7 +5,9 @@
     "description": "Blocks and redirects from websites based on a list sent to the extension",
     "content_scripts": [{
         "js": ["script.js"],
-        "matches": ["http://youtube.com/*"]
+        "matches": ["http://*/*", "https://*/*"]
     }],
-    "permissions": ["declarativeNetRequest"]
+    "background": {
+        "service_worker": "script.js"
+        }
 }
