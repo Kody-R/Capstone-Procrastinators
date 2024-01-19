@@ -7,11 +7,5 @@
         "js": ["script.js"],
         "matches": ["http://youtube.com/*"]
     }],
-    "background": {
-        "service_worker": "script.js"
-        },
-    "browser_action": {
-        "default_popup": "options.html"
-    },
     "permissions": ["declarativeNetRequest"]
 }
