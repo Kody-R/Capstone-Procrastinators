@@ -34,4 +34,4 @@ findAllURL = function changeAllURL(text){
 }
 
 findURL("https://www.youtube.com/");
-findAllURL("https://www.youtube.com");
+findAllURL("https://www.youtube.com/");
