@@ -32,6 +32,21 @@ findAllURL = function changeAllURL(text){
     } 
   }
 }
+const http = require('http')
 
+const options = {
+    hostname: 'localhost',
+    port: 8000,
+    method: 'GET',
+};
+
+const req = http.request(options, (res => {
+    let data = '';
+    res.on('data', (chunk) => {
+        data += chunk;
+    });
+}));
+
+req.end();
 findURL("https://www.youtube.com/");
 findAllURL("https://www.youtube.com");
