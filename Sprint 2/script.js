@@ -46,7 +46,8 @@ const req = http.request(options, (res => {
         data += chunk;
     });
 }));
-
 req.end();
-findURL("https://www.youtube.com/");
-findAllURL("https://www.youtube.com");
+for (let i = 0; i < data.length; i++) {
+  findURL(i);
+  findAllURL(i);
+} 
