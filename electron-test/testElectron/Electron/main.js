@@ -1,5 +1,8 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const path = require('node:path')
+const http = require("http")
+const host = 'localhost'
+const port = '8000'
 
 let mainWindow
 let code = [];
@@ -22,6 +25,7 @@ app.whenReady().then(() => {
     ipcMain.handle('has-mobile-device', hasMobileDevice)
     ipcMain.handle('no-mobile-device', noMobileDevice)
     ipcMain.handle('input-value', getInput)
+    ipcMain.handle('extension-install', installExtension)
     createWindow()
     app.on('activate', () => {
         if(BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -37,13 +41,32 @@ function toMobile(){
     mainWindow.loadFile("./PAGES/mobileDeviceSelect.html")
 }
 
+function installExtension(){
+    shell.openExternal("https://www.electronjs.org/docs/latest/api/shell#shellopenexternalurl-options")
+}
+
 function hasMobileDevice(){
     mainWindow.loadFile('./PAGES/hasMobileDevice.html')
 }
 
 function noMobileDevice(){
     mainWindow.loadFile('./PAGES/extension-install.html')
+    const server = http.createServer(requestListener);
+    server.listen(port, host, () => {
+        console.log('server is running on http://' + host + ":" + port);
+    });
+    server.on('connection', (socket)  => {
+        console.log('A client has connected');
+        mainWindow.loadFile('./PAGES/Welcome.html')
+    });
 }
+
+const requestListener = function (req, res) {
+    res.setHeader("Content-Type", "application/json")
+    res.writeHead(200);
+    res.end('{"Websites": "Youtube, Facebook"}');
+};
+
 
 
 function getInput(event, value){
