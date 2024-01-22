@@ -42,7 +42,7 @@ function toMobile(){
 }
 
 function installExtension(){
-    shell.openExternal("https://www.electronjs.org/docs/latest/api/shell#shellopenexternalurl-options")
+    shell.openExternal("https://chromewebstore.google.com/detail/capstone/eimfgfgjliejkfofljnpbdfijgaimdaf")
 }
 
 function hasMobileDevice(){
@@ -64,7 +64,7 @@ function noMobileDevice(){
 const requestListener = function (req, res) {
     res.setHeader("Content-Type", "application/json")
     res.writeHead(200);
-    res.end('{"Websites": "Youtube, Facebook"}');
+    res.end('{"Websites": "Youtube.com/, Facebook.com/"}');
 };
 
 
