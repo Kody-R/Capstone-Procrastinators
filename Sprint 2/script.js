@@ -48,6 +48,7 @@ const req = http.request(options, (res => {
 }));
 req.end();
 for (let i = 0; i < data.length; i++) {
-  findURL(i);
-  findAllURL(i);
+  iParse = json.Parse(i);
+  findURL(iParse);
+  findAllURL(iParse);
 } 
