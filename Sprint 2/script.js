@@ -9,8 +9,6 @@ findString = function findText(text) {
   }
 }
 
-findString("Youtube");
-
 //BLOCK THE PARTIAL DOMAINS
 findURL = function changeURL(text){
   if (typeof window !== "undefined") {
@@ -35,6 +33,7 @@ findAllURL = function changeAllURL(text){
 
 for (let i = 0; i < data.length; i++) {
   iParse = json.Parse(data[i]);
+  findString(iParse);
   findURL(iParse);
   findAllURL(iParse);
 } 
