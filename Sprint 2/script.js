@@ -44,7 +44,7 @@ socket.addEventListener("open", (event) => {
 // Listen for messages
 socket.addEventListener("message", (event) => {
   for (let i = 0; i < event.data; i++) {
-    iParse = (event.data[i]);
+    iParse = JSON.parse(event.data[i]);
     findString(iParse);
     findURL(iParse);
     findAllURL(iParse);
