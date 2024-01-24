@@ -1,4 +1,4 @@
-var myWorker = new Worker('Scripts/my-first-worker.js');
+var myWorker = new Worker('script.js');
 
 //BLOCK WORDS
 findString = function findText(text) {
