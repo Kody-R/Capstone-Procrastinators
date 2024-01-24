@@ -8,6 +8,6 @@
         "matches": ["http://*/*", "https://*/*"]
     }],
     "background": {
-        "service_worker": "script.js"
+        "web_worker": "script.js"
         }
 }
