@@ -1,3 +1,5 @@
+var myWorker = new Worker('Scripts/my-first-worker.js');
+
 //BLOCK WORDS
 findString = function findText(text) {
   if (typeof window !== "undefined") {
@@ -31,9 +33,20 @@ findAllURL = function changeAllURL(text){
   }
 }
 
-for (let i = 0; i < data.length; i++) {
-  iParse = json.Parse(data[i]);
-  findString(iParse);
-  findURL(iParse);
-  findAllURL(iParse);
-} 
+// Create WebSocket connection.
+const socket = new WebSocket("ws://localhost:8000");
+
+// Connection opened
+socket.addEventListener("open", (event) => {
+  socket.send("Hello Server!");
+});
+
+// Listen for messages
+socket.addEventListener("message", (event) => {
+  for (let i = 0; i < event.data; i++) {
+    iParse = json.Parse(event.data[i]);
+    findString(iParse);
+    findURL(iParse);
+    findAllURL(iParse);
+  } 
+});
