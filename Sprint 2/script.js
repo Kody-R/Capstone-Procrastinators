@@ -32,23 +32,9 @@ findAllURL = function changeAllURL(text){
     } 
   }
 }
-const http = require('http')
 
-const options = {
-    hostname: 'localhost',
-    port: 8000,
-    method: 'GET',
-};
-
-const req = http.request(options, (res => {
-    let data = '';
-    res.on('data', (chunk) => {
-        data += chunk;
-    });
-}));
-req.end();
 for (let i = 0; i < data.length; i++) {
-  iParse = json.Parse(i);
+  iParse = json.Parse(data[i]);
   findURL(iParse);
   findAllURL(iParse);
 } 
