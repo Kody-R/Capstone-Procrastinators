@@ -1,8 +1,10 @@
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
+var WebSocket = require('websocket').server
 const path = require('node:path')
 const http = require("http")
 const host = 'localhost'
 const port = '8000'
+var webServer;
 
 let mainWindow
 let code = [];
@@ -55,13 +57,25 @@ function noMobileDevice(){
     server.listen(port, host, () => {
         console.log('server is running on http://' + host + ":" + port);
     });
-    server.on('connection', (socket)  => {
-        console.log('A client has connected');
-        mainWindow.loadFile('./PAGES/Welcome.html')
+    webServer = new WebSocket({
+        httpServer: server,
+        autoAcceptConnections: true
     });
+    webServer.on('request', function(request){
+        var connection = request.accept('echo-protocol', request.origin);
+        connection.on('message', function(message){
+            if(message.type === 'utf8'){
+                connection.sendUTF(message.utf8Data)
+            }
+        });
+        connection.on('close', function(reasonCode, description){
+            console.log("connection closed")
+        });
+    })
 }
 
 const requestListener = function (req, res) {
+    console.log("Message sent")
     res.setHeader("Content-Type", "application/json")
     res.writeHead(200);
     res.end('{"Websites": "Youtube.com/, Facebook.com/"}');
