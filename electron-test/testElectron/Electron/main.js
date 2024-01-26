@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
-var WebSocket = require('websocket').server
+var WebSocket = require('ws');
 const path = require('node:path')
 const http = require("http")
 const host = 'localhost'
@@ -53,25 +53,21 @@ function hasMobileDevice(){
 
 function noMobileDevice(){
     mainWindow.loadFile('./PAGES/extension-install.html')
-    const server = http.createServer(requestListener);
-    server.listen(port, host, () => {
-        console.log('server is running on http://' + host + ":" + port);
-    });
-    webServer = new WebSocket({
-        httpServer: server,
-        autoAcceptConnections: true
-    });
-    webServer.on('request', function(request){
-        var connection = request.accept('echo-protocol', request.origin);
-        connection.on('message', function(message){
-            if(message.type === 'utf8'){
-                connection.sendUTF(message.utf8Data)
-            }
+    const wss = new WebSocket.Server({ noServer: true});
+    wss.on('connection', (ws) => {
+        console.log("client connected");
+        ws.on('message', (message) => {
+            console.log("Received" + message);
         });
-        connection.on('close', function(reasonCode, description){
-            console.log("connection closed")
+        ws.send("hello, client!");
+    })
+
+    mainWindow.webContents.session.server.on('upgrade', (request, socket, head) => {
+        wss.handleUpgrade(request, socket, head, (ws) => {
+            wss.emit('connection', ws, request);
         });
     })
+
 }
 
 const requestListener = function (req, res) {
