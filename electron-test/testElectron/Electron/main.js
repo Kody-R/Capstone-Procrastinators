@@ -18,7 +18,6 @@ const createWindow = () => {
             preload: path.join(__dirname, 'preload.js')
         }
     })
-
     mainWindow.loadFile('./PAGES/index.html')
 }
 
@@ -31,7 +30,7 @@ app.whenReady().then(() => {
     createWindow()
     app.on('activate', () => {
         if(BrowserWindow.getAllWindows().length === 0) createWindow()
-    })
+    });
 })
 
 app.on('window-all-closed', () => {
@@ -45,6 +44,19 @@ function toMobile(){
 
 function installExtension(){
     shell.openExternal("https://chromewebstore.google.com/detail/capstone/eimfgfgjliejkfofljnpbdfijgaimdaf")
+    const wss = new WebSocket.Server({ noServer: true});
+    wss.on('connection', (ws) => {
+        console.log('WebSocket connected');
+        ws.on('message', (message) => {
+            console.log('Recieved from extension', message);
+        });
+        ws.send('Hello from Electron');
+    });
+    mainWindow.webContents.session.server.on('upgrade', (request, socket, head) => {
+        wss.handleUpgrade(request, socket, head, (ws) => {
+            wss.emit('connection', w, request);
+        });
+    });
 }
 
 function hasMobileDevice(){
@@ -53,21 +65,6 @@ function hasMobileDevice(){
 
 function noMobileDevice(){
     mainWindow.loadFile('./PAGES/extension-install.html')
-    const wss = new WebSocket.Server({ noServer: true});
-    wss.on('connection', (ws) => {
-        console.log("client connected");
-        ws.on('message', (message) => {
-            console.log("Received" + message);
-        });
-        ws.send("hello, client!");
-    })
-
-    mainWindow.webContents.session.server.on('upgrade', (request, socket, head) => {
-        wss.handleUpgrade(request, socket, head, (ws) => {
-            wss.emit('connection', ws, request);
-        });
-    })
-
 }
 
 const requestListener = function (req, res) {
