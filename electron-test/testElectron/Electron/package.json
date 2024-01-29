@@ -10,6 +10,9 @@
   "author": "Nathan Jahn",
   "license": "ISC",
   "dependencies": {
-    "electron": "^28.1.3"
+    "electron": "^28.2.0",
+    "isomorphic-ws": "^5.0.0",
+    "websocket": "^1.0.34",
+    "ws": "^8.16.0"
   }
 }

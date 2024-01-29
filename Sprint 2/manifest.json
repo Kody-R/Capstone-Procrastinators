@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "Capstone",
+    "version": "0.3",
+    "description": "Blocks and redirects from websites based on a list sent to the extension",
+    "content_scripts": [{
+        "js": ["script.js"],
+        "matches": ["http://*/*", "https://*/*"]
+    }],
+    "background": {
+        "web_worker": "script.js"
+        }
+}
