@@ -34,19 +34,23 @@ findAllURL = function changeAllURL(text){
 }
 
 // Create WebSocket connection.
-const socket = new WebSocket("ws://localhost:8000");
+const socket = new WebSocket('ws://localhost:8000');
 
 // Connection opened
-socket.addEventListener("open", (event) => {
-  socket.send("Hello Server!");
-});
+socket.onopen = (event) => {
+  console.log('WebSocket connection established in Chrome extension');
+
+  // Send a message to the WebSocket server
+  socket.send('Hello from Chrome extension!');
+};
 
 // Listen for messages
-socket.addEventListener("message", (event) => {
+socket.onmessage = (event) => {
+  console.log(`Received message in Chrome extension: ${event.data}`);
   for (let i = 0; i < event.data; i++) {
     iParse = JSON.parse(event.data[i]);
     findString(iParse);
     findURL(iParse);
     findAllURL(iParse);
   } 
-});
+};
