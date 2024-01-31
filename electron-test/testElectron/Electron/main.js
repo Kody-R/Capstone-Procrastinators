@@ -61,7 +61,8 @@ function noMobileDevice(){
             const data = JSON.parse(message);
             console.log("decode message", data);
         });
-        ws.send('Hello from Electron');
+        const webSites = JSON.stringify('{"Websites": "Youtube.com/, Facebook.com/"}');
+        ws.send(webSites);
     });
     server.listen(port, () => {
         console.log("Server started on port %s", port);
