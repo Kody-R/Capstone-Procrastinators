@@ -60,6 +60,7 @@ function noMobileDevice(){
             console.log('Recieved from extension', message);
             const data = JSON.parse(message);
             console.log("decode message", data);
+            mainWindow.loadFile("./PAGES/Welcome.html");
         });
         const webSites = JSON.stringify('{"Websites": "Youtube.com/, Facebook.com/"}');
         ws.send(webSites);
