@@ -33,20 +33,22 @@ findAllURL = function changeAllURL(text){
   }
 }
 
-// Create WebSocket connection.
-const socket = new WebSocket("ws://localhost:8000");
+chrome.runtime.onInstalled.addListener(function() {
+  const socket = new WebSocket("ws://localhost:8000");
 
-// Connection opened
-socket.addEventListener("open", (event) => {
-  socket.send("Hello Server!");
+  socket.onopen = function(event) {
+  console.log("web socket connection opened", event);
+  const data = JSON.stringify("hello from chrome extension");
+  socket.send(data);
+};
+
+socket.onmessage = function(event) {
+  console.log("Recieved message from WebSocket server:", event.data);
+};
+
+socket.onclose = function(event) {
+  console.log("Websocket server closed", event);
+};
 });
 
-// Listen for messages
-socket.addEventListener("message", (event) => {
-  for (let i = 0; i < event.data; i++) {
-    iParse = json.Parse(event.data[i]);
-    findString(iParse);
-    findURL(iParse);
-    findAllURL(iParse);
-  } 
-});
+

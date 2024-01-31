@@ -44,19 +44,6 @@ function toMobile(){
 
 function installExtension(){
     shell.openExternal("https://chromewebstore.google.com/detail/capstone/eimfgfgjliejkfofljnpbdfijgaimdaf")
-    const wss = new WebSocket.Server({ noServer: true});
-    wss.on('connection', (ws) => {
-        console.log('WebSocket connected');
-        ws.on('message', (message) => {
-            console.log('Recieved from extension', message);
-        });
-        ws.send('Hello from Electron');
-    });
-    mainWindow.webContents.session.server.on('upgrade', (request, socket, head) => {
-        wss.handleUpgrade(request, socket, head, (ws) => {
-            wss.emit('connection', w, request);
-        });
-    });
 }
 
 function hasMobileDevice(){
@@ -65,6 +52,20 @@ function hasMobileDevice(){
 
 function noMobileDevice(){
     mainWindow.loadFile('./PAGES/extension-install.html')
+    const server = http.createServer();
+    const wss = new WebSocket.Server({ server });
+    wss.on('connection', (ws) => {
+        console.log('WebSocket connected');
+        ws.on('message', (message) => {
+            console.log('Recieved from extension', message);
+            const data = JSON.parse(message);
+            console.log("decode message", data);
+        });
+        ws.send('Hello from Electron');
+    });
+    server.listen(port, () => {
+        console.log("Server started on port %s", port);
+    });
 }
 
 const requestListener = function (req, res) {
