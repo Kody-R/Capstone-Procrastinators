@@ -44,6 +44,8 @@ chrome.runtime.onInstalled.addListener(function() {
 
 socket.onmessage = function(event) {
   console.log("Recieved message from WebSocket server:", event.data);
+  const data = JSON.stringify(event.data);
+  socket.send(data);
 };
 
 socket.onclose = function(event) {

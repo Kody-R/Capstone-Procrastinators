@@ -60,8 +60,10 @@ function noMobileDevice(){
             console.log('Recieved from extension', message);
             const data = JSON.parse(message);
             console.log("decode message", data);
+            mainWindow.loadFile("./PAGES/Welcome.html");
         });
-        ws.send('Hello from Electron');
+        const webSites = JSON.stringify('{"Websites": "Youtube.com/, Facebook.com/"}');
+        ws.send(webSites);
     });
     server.listen(port, () => {
         console.log("Server started on port %s", port);
