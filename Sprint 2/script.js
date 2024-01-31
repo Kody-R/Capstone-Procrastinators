@@ -1,4 +1,5 @@
 var myWorker = new Worker('script.js');
+var blockList = [];
 
 //BLOCK WORDS
 findString = function findText(text) {
@@ -45,10 +46,7 @@ chrome.runtime.onInstalled.addListener(function() {
 socket.onmessage = function(event) {
   console.log("Recieved message from WebSocket server:", event.data);
   for (let i = 0; i < event.data; i++) {
-    iParse = JSON.parse(event.data[i]);
-    findString(iParse);
-    findURL(iParse);
-    findAllURL(iParse);
+    blockList.push(event.data[i]);
   } 
   const data = JSON.stringify(event.data);
   socket.send(data);
@@ -58,3 +56,8 @@ socket.onclose = function(event) {
   console.log("Websocket server closed", event);
 };
 });
+for (let i = 0; i < blockList.length(); i++){
+  findString(blockList[i]);
+  findURL(blockList[i]);  
+  findAllURL(blockList[i]);
+};
