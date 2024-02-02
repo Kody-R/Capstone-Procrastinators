@@ -1,4 +1,3 @@
-var myWorker = new Worker('script.js');
 let blockList = new Array();
 
 //BLOCK WORDS
@@ -45,8 +44,8 @@ chrome.runtime.onInstalled.addListener(function() {
 
 socket.onmessage = function(event) {
   console.log("Recieved message from WebSocket server:", event.data);
-  blockList.push(JSON.parse(event.data)); 
-  const data = JSON.stringify(blockList);
+  blockList.push(event.data); 
+  const data = blockList;
   socket.send(data);
 };
 
@@ -55,7 +54,7 @@ socket.onclose = function(event) {
 };
 });
 let BList = blockList.toString();
-let blockList2 = BList.split(","); 
+let blockList2 = BList.split(", "); 
 for (let i = 0; i < blockList.length; i++){
   findString(blockList[i]);
   findURL(blockList[i]);
