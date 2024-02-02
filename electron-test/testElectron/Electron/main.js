@@ -58,10 +58,10 @@ function noMobileDevice(){
         console.log('WebSocket connected');
         ws.on('message', (message) => {
             console.log('Recieved from extension', message);
-            const data = JSON.parse(message);
-            console.log("decode message", data);
+            console.log("decode message", message);
+            mainWindow.loadFile("./PAGES/Welcome.html");
         });
-        const webSites = JSON.stringify('{"Websites": "Youtube.com/, Facebook.com/"}');
+        const webSites = 'https://www.youtube.com/, https://www.facebook.com/';
         ws.send(webSites);
     });
     server.listen(port, () => {
@@ -73,7 +73,7 @@ const requestListener = function (req, res) {
     console.log("Message sent")
     res.setHeader("Content-Type", "application/json")
     res.writeHead(200);
-    res.end('{"Websites": "Youtube.com/, Facebook.com/"}');
+    res.end('{"Websites": "youtube.com/, facebook.com/"}');
 };
 
 
