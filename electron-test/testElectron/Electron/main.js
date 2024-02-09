@@ -27,6 +27,8 @@ app.whenReady().then(() => {
     ipcMain.handle('no-mobile-device', noMobileDevice)
     ipcMain.handle('input-value', getInput)
     ipcMain.handle('extension-install', installExtension)
+    ipcMain.handle('go-to-create-session', goToCreateSession)
+    ipcMain.handle('go-to-session-selection', goToSessionSelection)
     createWindow()
     app.on('activate', () => {
         if(BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -76,7 +78,13 @@ const requestListener = function (req, res) {
     res.end('{"Websites": "youtube.com/, facebook.com/"}');
 };
 
+function goToCreateSession(){
+    mainWindow.loadFile('./PAGES/createSession.html')
+}
 
+function goToSessionSelection(){
+    mainWindow.loadFile('./PAGES/sessionSelection.html')
+}
 
 function getInput(event, value){
     console.log("input")

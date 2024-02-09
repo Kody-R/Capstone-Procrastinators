@@ -12,7 +12,7 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css"></link>
-    <title>Welcome</title>
+    <title>Create Session</title>
 </head>
 <body class="background">
   <nav>
@@ -26,9 +26,14 @@
       <li><a href="#">Contact</a></li>
     </ul>
   </nav>
-    <p class="title-text">Welcome! <br></p>
-    <button id="createSession">Create Session</button>
-    <button id="startSession">Start Session</button>
+    <p class="title-text">Create Session! <br></p>
+    <label for="times">Choose time limit:</label>
+    <input id="webSelect" placeholder="Enter Website to Block">
+    <select id="timeSelect" name="times">
+        <option value="30">30 Minutes</option>
+        <option value="60">1 Hour</option>
+        <option value="90">1 hour 30 Minutes</option>
+    </select>
 </body>
-<script src="../Renderers/welcomePage.js"></script>
+<script src="../Renderers/sessionCreation.js"></script>
 </html>
