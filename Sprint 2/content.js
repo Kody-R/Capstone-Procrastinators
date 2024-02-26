@@ -58,6 +58,7 @@ myPort.onMessage.addListener((m) => {
     clearTimeout(timeOut);
   };
 }
+  document.getElementById('timer').innerText = timerValue;
   for(let i = 0; i < parts.length; i++){
       console.log("this is happending")
       findString(parts[i]);

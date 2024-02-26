@@ -11,5 +11,8 @@
     "permissions": ["scripting", "activeTab", "webNavigation"],
     "background": {
         "service_worker": "script.js"
+    },
+    "action": {
+        "default_popup": "popup.html"
     }
 }
