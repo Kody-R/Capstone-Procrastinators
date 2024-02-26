@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ProCrastinatorsClient</string>
+    <string name="server_url" translatable="false">ws://127.0.0.1:8080</string>
+</resources>
