@@ -18,3 +18,10 @@ function getInputValue(e) {
     session.website = e.target.value
     console.log(session)
 }
+
+const SendSessionData = async () => {
+    await window.versions.SendSessionData(session)
+}
+
+const sendSession = document.getElementById("sendSession")
+sendSession.addEventListener('click', SendSessionData)

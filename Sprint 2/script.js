@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener(function() {
   
   socket.onmessage = function(event) {
     console.log("Recieved message from WebSocket server:", event.data);
-    blockList = event.data.split(", ");
+    blockList = event.data.toString()
     console.log(blockList);
     socket.send(blockList);
     chrome.runtime.onConnect.addListener(connected);
