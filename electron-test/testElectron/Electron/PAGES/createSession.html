@@ -12,7 +12,7 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css"></link>
-    <title></title>
+    <title>Create Session</title>
 </head>
 <body class="background">
   <nav>
@@ -26,12 +26,15 @@
       <li><a href="#">Contact</a></li>
     </ul>
   </nav>
-  <p class="title-text">Are you going to be using a mobile device?</p>
-  <div class="mobile-select">
-    <button id="hasMobile" class="continue">Yes</button>
-    <button id="noMobile" class="continue">No</button>
-
-  </div>
+    <p class="title-text">Create Session! <br></p>
+    <label for="times">Choose time limit:</label>
+    <input id="webSelect" placeholder="Enter Website to Block">
+    <select id="timeSelect" name="times">
+        <option value="30">30 Minutes</option>
+        <option value="60">1 Hour</option>
+        <option value="90">1 hour 30 Minutes</option>
+    </select>
+    <button id="sendSession" class="continue">SendSession</button>
 </body>
-<script src="../Renderers/renderer2.js"></script>
+<script src="../Renderers/sessionCreation.js"></script>
 </html>
