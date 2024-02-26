@@ -44,11 +44,16 @@ findString = function findText(text) {
   myPort.onMessage.addListener((m) => {
     console.log("from webpage");
     webBlockList = m.greeting
+    var timer = int;
+    const timeOut = setTimeout(() => {
+    webBlockList.length = 0;
+    },timer);
+    if (webBlockList.length == 0){
+      clearTimeout(timeOut);
+    };
     for(let i = 0; i < webBlockList.length; i++){
         findString(webBlockList[i]);
         findURL(webBlockList[i]);
         findAllURL(webBlockList[i]);
     }
   });
-  
-  
