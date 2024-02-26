@@ -49,6 +49,7 @@ findString = function findText(text) {
       const timerValue = parseInt(parts[0]);
       setTimeout(() => {
         console.log('Timer expired!');
+        webBlockList.length = 0;
       }, timerValue);
       parts.shift();
     if (webBlockList.length == 0){
