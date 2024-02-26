@@ -43,17 +43,21 @@ findString = function findText(text) {
   
   myPort.onMessage.addListener((m) => {
     console.log("from webpage");
-    webBlockList = m.greeting
-    var timer = int;
-    const timeOut = setTimeout(() => {
-    webBlockList.length = 0;
-    },timer);
+    webBlockList = JSON.parse(m.greeting)
+    const parts = webBlockList.split(',');
+    if (parts.length > 1) {
+      const timerValue = parseInt(parts[0]);
+      setTimeout(() => {
+        console.log('Timer expired!');
+      }, timerValue);
+      parts.shift();
     if (webBlockList.length == 0){
       clearTimeout(timeOut);
     };
-    for(let i = 0; i < webBlockList.length; i++){
-        findString(webBlockList[i]);
-        findURL(webBlockList[i]);
-        findAllURL(webBlockList[i]);
+  }
+    for(let i = 0; i < parts.length; i++){
+        findString(parts[i]);
+        findURL(parts[i]);
+        findAllURL(parts[i]);
     }
   });
