@@ -60,4 +60,5 @@ findString = function findText(text) {
         findURL(parts[i]);
         findAllURL(parts[i]);
     }
+    document.getElementById('timer').innerText = timerValue;
   });
