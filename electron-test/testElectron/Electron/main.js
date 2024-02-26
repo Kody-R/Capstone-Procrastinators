@@ -5,6 +5,14 @@ const http = require("http")
 const host = 'localhost'
 const port = '8000'
 var webServer;
+server = null;
+wss = null;
+ws2 = null;
+
+const session = {
+    'time': null,
+    'website': null
+}
 
 let mainWindow
 let code = [];
@@ -27,6 +35,9 @@ app.whenReady().then(() => {
     ipcMain.handle('no-mobile-device', noMobileDevice)
     ipcMain.handle('input-value', getInput)
     ipcMain.handle('extension-install', installExtension)
+    ipcMain.handle('go-to-create-session', goToCreateSession)
+    ipcMain.handle('go-to-session-selection', goToSessionSelection)
+    ipcMain.handle('send-session-data', SendSessionData)
     createWindow()
     app.on('activate', () => {
         if(BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -52,13 +63,15 @@ function hasMobileDevice(){
 
 function noMobileDevice(){
     mainWindow.loadFile('./PAGES/extension-install.html')
-    const server = http.createServer();
-    const wss = new WebSocket.Server({ server });
+    server = http.createServer();
+    wss = new WebSocket.Server({ server });
     wss.on('connection', (ws) => {
+        ws2 = ws;
         console.log('WebSocket connected');
         ws.on('message', (message) => {
             console.log('Recieved from extension', message);
             console.log("decode message", message);
+            console.log(message.toString());
             mainWindow.loadFile("./PAGES/Welcome.html");
         });
         const webSites = 'https://www.youtube.com/, https://www.facebook.com/';
@@ -76,7 +89,13 @@ const requestListener = function (req, res) {
     res.end('{"Websites": "youtube.com/, facebook.com/"}');
 };
 
+function goToCreateSession(){
+    mainWindow.loadFile('./PAGES/createSession.html')
+}
 
+function goToSessionSelection(){
+    mainWindow.loadFile('./PAGES/sessionSelection.html')
+}
 
 function getInput(event, value){
     console.log("input")
@@ -99,5 +118,9 @@ function CorrectCode(inputCode){
         }
     }
     return true;
+}
+
+function SendSessionData(event, session){
+    ws2.send(JSON.stringify(session))
 }
 
