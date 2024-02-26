@@ -6,7 +6,7 @@ const session = {
 const timeSelect = document.getElementById('timeSelect')
 
 timeSelect.onchange = () => {
-    session.time = timeSelect.value
+    session.time = timeSelect.value * 60000
     console.log(session) 
 }
 
