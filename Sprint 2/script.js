@@ -1,9 +1,22 @@
 let blockList = new Array();
-
+socket = null;
 
 chrome.runtime.onInstalled.addListener(function() {
+  InitializeWebSocket();
+  setInterval(() => {
+    if (socket && socket.readyState !== WebSocket.OPEN) {
+      // WebSocket connection is not open, try to reconnect
+      console.log("Attempting to reconnect to WebSocket server");
+      InitializeWebSocket();
+    }
+  }, 5000);
+});
+
+
+function InitializeWebSocket(){
   try{
-    const socket = new WebSocket("ws://localhost:8000");
+    console.log("Init websocket from extension");
+    socket = new WebSocket("ws://localhost:8000");
   
     socket.onopen = function(event) {
     console.log("web socket connection opened", event);
@@ -16,16 +29,18 @@ chrome.runtime.onInstalled.addListener(function() {
     blockList = event.data.toString()
     console.log(blockList);
     socket.send(blockList);
-    chrome.runtime.onConnect.addListener(connected);
   };
   
   socket.onclose = function(event) {
-    console.log("Websocket server closed", event);
+    InitializeWebSocket();
   };
+  chrome.runtime.onConnect.addListener(connected);
   } catch(error){
     console.error("No extension to connect to", error.message);
   }
-});
+};
+
+
 
 
 let portFromCS;
