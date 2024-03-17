@@ -61,12 +61,24 @@ function hasMobileDevice(){
     mainWindow.loadFile('./PAGES/hasMobileDevice.html')
 }
 
-function noMobileDevice(){
-    mainWindow.loadFile('./PAGES/extension-install.html')
-    server = http.createServer();
+async function noMobileDevice(){
+    mainWindow.loadFile('./PAGES/extension-install.html');
+    await ServerSetup();
+}
+
+async function ServerSetup(){
+    server = new http.createServer();
+    WebSocketSetUp();
+    server.listen(port, () => {
+        console.log("Server started on port %s", port);
+    });
+}
+
+function WebSocketSetUp(){
+    console.log("WebSocket being setup");
     wss = new WebSocket.Server({ server });
     wss.on('connection', (ws) => {
-        ws2 = ws;
+    ws2 = ws;
         console.log('WebSocket connected');
         ws.on('message', (message) => {
             console.log('Recieved from extension', message);
@@ -74,11 +86,16 @@ function noMobileDevice(){
             console.log(message.toString());
             mainWindow.loadFile("./PAGES/Welcome.html");
         });
-        const webSites = 'https://www.youtube.com/, https://www.facebook.com/';
-        ws.send(webSites);
-    });
-    server.listen(port, () => {
-        console.log("Server started on port %s", port);
+        ws.send("toServer");
+        ws.onclose = function(){
+            console.log("Web socket closed, starting new websockets")
+            //WebSocketSetUp();
+            ws.close();
+        }
+        ws.on('close', (code, reason) => {
+            console.log('WebSocket disconnected. Code:', code, 'Reason:', reason.toString());
+            // Additional cleanup or handling logic can be added here
+        });
     });
 }
 
@@ -121,6 +138,12 @@ function CorrectCode(inputCode){
 }
 
 function SendSessionData(event, session){
-    ws2.send(JSON.stringify(session))
+    this.server.getConnections(Connections)
+    ws2.send(JSON.stringify(session));
+    console.log("Message sent")
+}
+
+function Connections(err, count){
+    console.log(count);
 }
 
