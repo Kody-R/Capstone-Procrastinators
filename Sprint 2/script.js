@@ -1,6 +1,7 @@
 let blockList = new Array();
 socket = null;
 
+
 chrome.runtime.onInstalled.addListener(function() {
   InitializeWebSocket();
   setInterval(() => {
@@ -9,6 +10,9 @@ chrome.runtime.onInstalled.addListener(function() {
       console.log("Attempting to reconnect to WebSocket server");
       InitializeWebSocket();
     }
+  }, 5000);
+  setInterval(() => {
+    console.log(socket.readyState);
   }, 5000);
 });
 
@@ -20,7 +24,7 @@ function InitializeWebSocket(){
   
     socket.onopen = function(event) {
     console.log("web socket connection opened", event);
-    const data = JSON.stringify("hello from chrome extension");
+    const data = "FirstMessage"
     socket.send(data);
   };
   
@@ -38,6 +42,10 @@ function InitializeWebSocket(){
   } catch(error){
     console.error("No extension to connect to", error.message);
   }
+  setInterval(() => {
+    const ping = JSON.stringify("I'm still here...")
+    socket.send(ping);  
+  }, 5000);
 };
 
 
@@ -53,6 +61,7 @@ function connected(p) {
     console.log(m.greeting);
   });
 }
+
 
 
 
