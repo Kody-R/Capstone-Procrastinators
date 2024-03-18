@@ -84,18 +84,22 @@ function WebSocketSetUp(){
             console.log('Recieved from extension', message);
             console.log("decode message", message);
             console.log(message.toString());
-            mainWindow.loadFile("./PAGES/Welcome.html");
+            if(message.toString() === "FirstMessage"){
+                mainWindow.loadFile("./PAGES/Welcome.html");
+            }
         });
         ws.send("toServer");
         ws.onclose = function(){
             console.log("Web socket closed, starting new websockets")
-            //WebSocketSetUp();
-            ws.close();
+            setTimeout(WebSocketSetUp, 1000);
         }
+        /*
         ws.on('close', (code, reason) => {
             console.log('WebSocket disconnected. Code:', code, 'Reason:', reason.toString());
             // Additional cleanup or handling logic can be added here
+            ws.close();
         });
+        */
     });
 }
 
