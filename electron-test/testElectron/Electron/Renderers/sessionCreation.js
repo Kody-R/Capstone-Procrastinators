@@ -37,7 +37,7 @@ async function SendSessionData() {
 
 var fs = require('fs');
 
-fs.writeFile('C:\\mySaveFile.txt', sessionList, function (err) {
+fs.writeFile('C:\mySaveFile.txt', sessionList, function (err) {
   if (err) throw err;
   console.log('Saved!');
 }); 
