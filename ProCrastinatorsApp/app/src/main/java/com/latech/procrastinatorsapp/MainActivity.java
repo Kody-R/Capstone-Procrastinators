@@ -26,15 +26,23 @@ public class MainActivity extends AppCompatActivity {
     private String serverName;
     private int serverPort;
 
+    private AppBlocker appBlocker;
+    private Button btnGoHome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // websocket
         tvReceivedData = findViewById(R.id.tvRecTxt);
         etServerName = findViewById(R.id.etServerName);
         etServerPort = findViewById(R.id.etServerPort);
         btnClientConnect = findViewById(R.id.btnClientConnect);
+
+        // service
+        btnGoHome = findViewById(R.id.btnGoHome);
+        appBlocker = new AppBlocker(getApplicationContext());
 
     }
 
@@ -80,6 +88,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
+
+    }
+
+    public void onClickGoHome(View view) {
+
+        appBlocker.goToHomeScreen();
 
     }
 
