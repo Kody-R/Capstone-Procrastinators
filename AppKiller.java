@@ -15,6 +15,28 @@ public class AppKiller {
         bannedProcesses.add("Spotify.exe");
         bannedProcesses.add("CalculatorApp.exe");
 		bannedProcesses.add("msedge.exe");
+		bannedProcesses.add("Steam.exe");
+		bannedProcesses.add("firefox.exe");
+		bannedProcesses.add("discord.exe");
+		bannedProcesses.add("opera.exe");
+		bannedProcesses.add("photoshop.exe");
+		bannedProcesses.add("itunes.exe");
+		bannedProcesses.add("skype.exe");
+		bannedProcesses.add("origin.exe");
+		bannedProcesses.add("minecraft.exe");
+		bannedProcesses.add("fortnite.exe");
+		bannedProcesses.add("vlc.exe");
+		bannedProcesses.add("netflix.exe");
+		bannedProcesses.add("youtube.exe");
+		bannedProcesses.add("hulu.exe");
+		bannedProcesses.add("amazonprimevideo.exe");
+		bannedProcesses.add("amazonmusic.exe");
+		bannedProcesses.add("disneyplus.exe");
+		bannedProcesses.add("hbomax.exe");
+		bannedProcesses.add("peacock.exe");
+		bannedProcesses.add("roblox.exe");
+		bannedProcesses.add("valorant.exe");
+		
         
         // Create a timer to check for running processes periodically
         Timer timer = new Timer();
@@ -23,7 +45,7 @@ public class AppKiller {
             public void run() {
                 checkAndTerminateProcesses();
             }
-        }, 0, 3000); // Check every 5 seconds (you can adjust this interval)
+        }, 0, 1500); // Check every 3 seconds (you can adjust this interval)
     }
     
     private static void checkAndTerminateProcesses() {
