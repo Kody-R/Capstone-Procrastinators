@@ -1,11 +1,16 @@
 package com.latech.procrastinatorsapp;
 
+import android.app.ActivityManager;
 import android.app.Service;
+import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import java.util.List;
 
 public class AppBlocker extends Service {
 
@@ -15,22 +20,17 @@ public class AppBlocker extends Service {
         this.appContext = appContext;
     }
 
-    // finishAndRemoveTask() will close the current activity and associated activities
 
-//    public static void findForegroundActivity() {
-//        // source: https://stackoverflow.com/questions/19852069/blocking-android-apps-programmatically
-//        // need to modify this to not use deprecated functions
-//        ActivityManager mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-//        List<ActivityManager.RunningTaskInfo> RunningTask = mActivityManager.getRunningTasks(1);
-//        ActivityManager.RunningTaskInfo ar = RunningTask.get(0);
-//        activityOnTop=ar.topActivity.getClassName();
-//    }
+    public void detectForegroundActivity() {
+//        UsageStatsManager usageStatsManager = new UsageStatsManager();
+    }
 
     public static void closeActivity() {
-
+        // finishAndRemoveTask() will close the current activity and associated activities
     }
 
     public void goToHomeScreen() {
+        detectForegroundActivity(); // quick button test for detect foreground
         Intent startHomeScreen = new Intent(Intent.ACTION_MAIN);
         startHomeScreen.addCategory(Intent.CATEGORY_HOME);
         startHomeScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -38,7 +38,7 @@ public class AppBlocker extends Service {
     }
 
 
-    // App launches cannot be detected in Android directly, instead we have to loop over currently running apps
+    // App launches cannot be detected in Android directly, instead we have to loop over currently running apps to periodically check.
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);
