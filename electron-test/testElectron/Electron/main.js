@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, shell } = require('electron')
 var WebSocket = require('ws');
 const path = require('node:path')
 const http = require("http")
+const { spawn } = require('child_process');
 const host = 'localhost'
 const port = '8000'
 var webServer;
@@ -145,6 +146,17 @@ function SendSessionData(event, session){
     this.server.getConnections(Connections)
     ws2.send(JSON.stringify(session));
     console.log("Message sent")
+    RunAppKiller();
+}
+
+function RunAppKiller(){
+    const javaAppKiller = spawn('java', ['AppKiller.java', CreateCommandLineList()]);
+    console.log("Application Killer started");
+}
+
+function CreateCommandLineList(){
+    bannedAppsList = "Spotify.exe discord.exe"
+    return bannedAppsList;
 }
 
 function Connections(err, count){

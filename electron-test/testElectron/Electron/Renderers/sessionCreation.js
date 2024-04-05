@@ -1,27 +1,43 @@
 const session = {
     'time': null,
     'website': null
+};
+
+const timeSelect = document.getElementById('timeSelect');
+const websiteSelect = document.getElementById('webSelect');
+const sendSession = document.getElementById('sendSession');
+
+timeSelect.addEventListener('input', getInputTimeValue);
+websiteSelect.addEventListener('input', getInputValue);
+sendSession.addEventListener('click', SendSessionData);
+
+function getInputTimeValue(e) {
+    session.time = e.target.value * 60000; // Assuming time is represented in minutes
+    console.log(session);
+    updateSessionList();
 }
-
-const timeSelect = document.getElementById('timeSelect')
-
-timeSelect.onchange = () => {
-    session.time = timeSelect.value * 60000
-    console.log(session) 
-}
-
-const websiteSelect = document.getElementById('webSelect')
-
-websiteSelect.addEventListener("input", getInputValue)
 
 function getInputValue(e) {
-    session.website = e.target.value
-    console.log(session)
+    session.website = e.target.value;
+    console.log(session);
+    updateSessionList();
 }
 
-const SendSessionData = async () => {
-    await window.versions.SendSessionData(session)
+function updateSessionList() {
+    const sessionList = {
+        'pSessionW': session.website,
+        'pSessionT': session.time
+    };
+    console.log(sessionList);
 }
 
-const sendSession = document.getElementById("sendSession")
-sendSession.addEventListener('click', SendSessionData)
+async function SendSessionData() {
+    await window.versions.SendSessionData(session);
+}
+
+var fs = require('fs');
+
+fs.writeFile('C:\mySaveFile.txt', sessionList, function (err) {
+  if (err) throw err;
+  console.log('Saved!');
+}); 
