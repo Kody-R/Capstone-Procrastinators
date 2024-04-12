@@ -12,6 +12,7 @@
   "dependencies": {
     "electron": "^28.2.0",
     "isomorphic-ws": "^5.0.0",
+    "node-file-dialog": "https://github.com/LiterallyANoodle/node-file-dialog/tarball/main",
     "websocket": "^1.0.34",
     "ws": "^8.16.0"
   }
