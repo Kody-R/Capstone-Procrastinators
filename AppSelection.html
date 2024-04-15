@@ -9,7 +9,7 @@
     <label>Choose applications to block:</label>
     <div id="applicationOptions">
     </div>
-    <button id="Block Applications">Block Applications</button>
+    <button id="BlockApplications">Block Applications</button>
 
 <script>
     // Application options with label and value
@@ -77,21 +77,31 @@
     let selectedApplications = ['msedge.exe','firefox.exe','opera.exe'];
 
     // Function to handle saving selected options
-    document.getElementById('Block Applications').addEventListener('click', function() {
-        // Clear the selected applications list
-        selectedApplications = ['msedge.exe','firefox.exe','opera.exe'];
-
+    document.getElementById('BlockApplications').addEventListener('click', function() {
         const checkboxes = document.querySelectorAll('input[name="applicationOption"]');
         const selectedOptions = Array.from(checkboxes)
             .filter(checkbox => checkbox.checked)
             .map(checkbox => checkbox.value);
 
-        // Append selected options to selectedApplications list
-        selectedOptions.forEach(option => {
-            if (!selectedApplications.includes(option)) {
-                selectedApplications.push(option);
+        // Check if any checkboxes are selected
+        if (selectedOptions.length === 0) {
+            // If none are selected, add all options to selectedApplications
+            selectedApplications = ['msedge.exe','firefox.exe','opera.exe'];
+            applicationOptions.forEach(option => {
+            if (!selectedApplications.includes(option.value)) {
+                selectedApplications.push(option.value);
             }
         });
+
+        } else {
+            // Otherwise, append selected options to selectedApplications list
+            selectedApplications = ['msedge.exe','firefox.exe','opera.exe'];
+            selectedOptions.forEach(option => {
+                if (!selectedApplications.includes(option)) {
+                    selectedApplications.push(option);
+                }
+            });
+        }
 
         // Log selected applications
         console.log('Selected applications:', selectedApplications);
