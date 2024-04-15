@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block Applications</title>
+</head>
+<body>
+    <label>Choose applications to block:</label>
+    <div id="applicationOptions">
+    </div>
+    <button id="Block Applications">Block Applications</button>
+
+<script>
+    // Application options with label and value
+    const applicationOptions = [
+        { value: 'steam.exe', label: 'Steam' },
+        { value: 'discord.exe', label: 'Discord' },
+        { value: 'origin.exe', label: 'Origin' },
+        { value: 'youtube.exe', label: 'YouTube' },
+        { value: 'hulu.exe', label: 'Hulu' },
+        { value: 'minecraft.exe', label: 'Minecraft' },
+        { value: 'vlc.exe', label: 'VLC' },
+        { value: 'disneyplus.exe', label: 'Disney Plus' },
+        { value: 'hbomax.exe', label: 'HBO Max' },
+        { value: 'peacock.exe', label: 'Peacock' },
+        { value: 'roblox.exe', label: 'Roblox' },
+        { value: 'spotify.exe', label: 'Spotify' }
+        // Add more application options as needed
+    ];
+
+    // Function to dynamically generate checkboxes for application options
+    function generateApplicationOptions() {
+        const applicationOptionsDiv = document.getElementById('applicationOptions');
+
+        // Generate checkboxes for application options
+        applicationOptions.forEach(option => {
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.name = 'applicationOption';
+            checkbox.value = option.value;
+            applicationOptionsDiv.appendChild(checkbox);
+
+            const label = document.createElement('label');
+            label.textContent = option.label;
+            applicationOptionsDiv.appendChild(label);
+
+            applicationOptionsDiv.appendChild(document.createElement('br'));
+        });
+
+        // Add 'ALL' checkbox
+        const allCheckbox = document.createElement('input');
+        allCheckbox.type = 'checkbox';
+        allCheckbox.name = 'selectAll';
+        allCheckbox.value = 'ALL';
+        allCheckbox.id = 'selectAllCheckbox';
+        allCheckbox.addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('input[name="applicationOption"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+
+        const allLabel = document.createElement('label');
+        allLabel.textContent = 'ALL';
+        allLabel.setAttribute('for', 'selectAllCheckbox');
+
+        applicationOptionsDiv.appendChild(allCheckbox);
+        applicationOptionsDiv.appendChild(allLabel);
+        applicationOptionsDiv.appendChild(document.createElement('br'));
+    }
+
+    // Call the function to generate checkboxes when the page loads
+    window.onload = generateApplicationOptions;
+
+    // List to store selected applications
+    let selectedApplications = ['msedge.exe','firefox.exe','opera.exe'];
+
+    // Function to handle saving selected options
+    document.getElementById('Block Applications').addEventListener('click', function() {
+        // Clear the selected applications list
+        selectedApplications = ['msedge.exe','firefox.exe','opera.exe'];
+
+        const checkboxes = document.querySelectorAll('input[name="applicationOption"]');
+        const selectedOptions = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+
+        // Append selected options to selectedApplications list
+        selectedOptions.forEach(option => {
+            if (!selectedApplications.includes(option)) {
+                selectedApplications.push(option);
+            }
+        });
+
+        // Log selected applications
+        console.log('Selected applications:', selectedApplications);
+    });
+</script>
+</body>
+</html>
