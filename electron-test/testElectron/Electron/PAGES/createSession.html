@@ -15,26 +15,23 @@
     <title>Create Session</title>
 </head>
 <body class="background">
-  <nav>
-    <div class = "logo">
-      <img src="C:\Users\ark02\Downloads\Pro-Crastinators\Capstone-Procrastinators-Desktop-Application\electron-test\testElectron\Electron\Resources\logo-png.png" alt="Logo">
-    </div>
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
+  <div class="centerDiv">
     <p class="title-text">Create Session! <br></p>
-    <label for="times">Choose time limit:</label>
-    <input id="webSelect" placeholder="Enter Website to Block">
-    <select id="timeSelect" name="times">
+    <div class="centerDiv">
+      <label for="times">Choose time limit:</label>
+    </div>
+    <div class="centerDiv">
+      <input id="webSelect" placeholder="Enter Website to Block">
+    </div>
+    <div class="centerDiv">
+      <select id="timeSelect" name="times">
         <option value="30">30 Minutes</option>
         <option value="60">1 Hour</option>
         <option value="90">1 hour 30 Minutes</option>
     </select>
+    </div>
     <button id="sendSession" class="continue">SendSession</button>
+  </div>
 </body>
 <script src="../Renderers/sessionCreation.js"></script>
 </html>

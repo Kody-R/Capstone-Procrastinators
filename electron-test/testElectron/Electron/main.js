@@ -31,9 +31,9 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
-    ipcMain.handle('to-mobile', toMobile)
+    ipcMain.handle('to-mobile', noMobileDevice)
     ipcMain.handle('has-mobile-device', hasMobileDevice)
-    ipcMain.handle('no-mobile-device', noMobileDevice)
+    //ipcMain.handle('no-mobile-device', noMobileDevice)
     ipcMain.handle('input-value', getInput)
     ipcMain.handle('extension-install', installExtension)
     ipcMain.handle('go-to-create-session', goToCreateSession)
@@ -147,6 +147,7 @@ function SendSessionData(event, session){
     ws2.send(JSON.stringify(session));
     console.log("Message sent")
     RunAppKiller();
+    mainWindow.loadFile('./PAGES/blocked.html')
 }
 
 function RunAppKiller(){
