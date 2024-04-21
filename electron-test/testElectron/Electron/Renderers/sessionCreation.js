@@ -1,5 +1,3 @@
-const dialog = require('node-file-dialog')
-
 const session = {
     'time': null,
     'website': null
@@ -13,7 +11,6 @@ const fileDialog = document.getElementById('openFileDialog');
 timeSelect.addEventListener('input', getInputTimeValue);
 websiteSelect.addEventListener('input', getInputValue);
 sendSession.addEventListener('click', SendSessionData);
-fileDialog.addEventListener('click', getFilePaths);
 
 function getInputTimeValue(e) {
     session.time = e.target.value * 60000; // Assuming time is represented in minutes
@@ -45,16 +42,3 @@ fs.writeFile('C:\mySaveFile.txt', sessionList, function (err) {
   if (err) throw err;
   console.log('Saved!');
 }); 
-
-function getFilePaths() {
-    const config = {
-        type: 'directory',
-        filetypes: { 
-            'Executable': '*.exe',
-            'All files': '*.*',
-        }
-    };
-    var dirs;
-    dialog(config).then(dir => dirs = dir).catch(err => console.log(err));
-    return dirs;
-}

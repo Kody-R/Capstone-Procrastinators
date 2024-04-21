@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
 var WebSocket = require('ws');
 const path = require('node:path')
+const dialog = require('node-file-dialog')
 const http = require("http")
 const { spawn } = require('child_process');
 const host = 'localhost'
@@ -37,6 +38,7 @@ app.whenReady().then(() => {
     ipcMain.handle('input-value', getInput)
     ipcMain.handle('extension-install', installExtension)
     ipcMain.handle('go-to-create-session', goToCreateSession)
+    ipcMain.handle('get-file-paths', getFilePaths)
     ipcMain.handle('go-to-session-selection', goToSessionSelection)
     ipcMain.handle('send-session-data', SendSessionData)
     createWindow()
@@ -162,4 +164,17 @@ function CreateCommandLineList(){
 
 function Connections(err, count){
     console.log(count);
+}
+
+function getFilePaths() {
+    const config = {
+        type: 'directory',
+        filetypes: { 
+            'Executable': '*.exe',
+            'All files': '*.*',
+        }
+    };
+    var dirs;
+    dialog(config).then(dir => dirs = dir).catch(err => console.log(err));
+    return dirs;
 }
