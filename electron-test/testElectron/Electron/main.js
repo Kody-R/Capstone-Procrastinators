@@ -146,12 +146,12 @@ function SendSessionData(event, session){
     this.server.getConnections(Connections)
     ws2.send(JSON.stringify(session));
     console.log("Message sent")
-    RunAppKiller();
+    RunAppKiller(session);
     mainWindow.loadFile('./PAGES/blocked.html')
 }
 
-function RunAppKiller(){
-    const javaAppKiller = spawn('java', ['AppKiller.java', CreateCommandLineList()]);
+function RunAppKiller(session){
+    const javaAppKiller = spawn('java', ['AppKiller.java', session.apps]);
     console.log("Application Killer started");
 }
 
@@ -163,4 +163,3 @@ function CreateCommandLineList(){
 function Connections(err, count){
     console.log(count);
 }
-
