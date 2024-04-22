@@ -176,8 +176,10 @@ function getFilePaths() {
     };
     var dirs;
     dialog(config).then(dir => dirs = dir).catch(err => console.log(err));
-    var fileNames = dirs.forEach(element => {
-        element.split('/').at(-1);
-    });
+    var fileNames = [];
+    var splits = dirs.split('/');
+    for (i in dirs.length) {
+        fileNames.append(splits.at(-1));
+    }
     console.log(fileNames);
 }
