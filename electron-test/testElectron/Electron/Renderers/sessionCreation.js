@@ -30,7 +30,7 @@ const fileDialog = document.getElementById('openFileDialog');
 timeSelect.addEventListener('input', getInputTimeValue);
 websiteSelect.addEventListener('input', getInputValue);
 sendSession.addEventListener('click', SendSessionData);
-//fileDialog.addEventListener('click', getFilePaths);
+fileDialog.addEventListener('click', getFilePaths);
 generateApplicationOptions();
 
 
