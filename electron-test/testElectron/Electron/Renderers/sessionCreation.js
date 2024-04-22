@@ -11,6 +11,7 @@ const fileDialog = document.getElementById('openFileDialog');
 timeSelect.addEventListener('input', getInputTimeValue);
 websiteSelect.addEventListener('input', getInputValue);
 sendSession.addEventListener('click', SendSessionData);
+fileDialog.addEventListener('click', getFilePaths);
 
 function getInputTimeValue(e) {
     session.time = e.target.value * 60000; // Assuming time is represented in minutes
@@ -42,3 +43,8 @@ fs.writeFile('C:\mySaveFile.txt', sessionList, function (err) {
   if (err) throw err;
   console.log('Saved!');
 }); 
+
+
+async function getFilePaths() {
+    await window.versions.getFilePaths();
+}

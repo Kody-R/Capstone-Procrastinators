@@ -170,8 +170,8 @@ function getFilePaths() {
     const config = {
         type: 'directory',
         filetypes: { 
-            'Executable': '*.exe',
-            'All files': '*.*',
+            '"Executable"': '"*.exe"',
+            '"All files"': '"*.*"',
         }
     };
     var dirs;
