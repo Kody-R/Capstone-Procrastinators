@@ -1,5 +1,3 @@
-//const dialog = require('node-file-dialog')
-
 const session = {
     'time': null,
     'website': null,
@@ -106,20 +104,10 @@ fs.writeFile('C:\mySaveFile.txt', sessionList, function (err) {
   console.log('Saved!');
 }); 
 
-function getFilePaths() {
-    const config = {
-        type: 'directory',
-        filetypes: { 
-            'Executable': '*.exe',
-            'All files': '*.*',
-        }
-    };
-    var dirs;
-    dialog(config).then(dir => dirs = dir).catch(err => console.log(err));
-    console.log(dirs);
-    return dirs;
-}
 
+async function getFilePaths() {
+    await window.versions.getFilePaths();
+}
 
 // Function to dynamically generate checkboxes for application options
 function generateApplicationOptions() {
@@ -167,3 +155,4 @@ function generateApplicationOptions() {
 // List to store selected applications
 
 // Function to handle saving selected options
+
