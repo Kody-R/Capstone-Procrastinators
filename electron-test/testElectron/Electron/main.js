@@ -10,6 +10,7 @@ var webServer;
 server = null;
 wss = null;
 ws2 = null;
+var selectedExe = []
 
 const session = {
     'time': null,
@@ -166,20 +167,22 @@ function Connections(err, count){
     console.log(count);
 }
 
-function getFilePaths() {
+async function getFilePaths() {
     const config = {
-        type: 'directory',
+        type: 'open-files',
         filetypes: { 
             '"Executable"': '"*.exe"',
             '"All files"': '"*.*"',
         }
     };
     var dirs;
-    dialog(config).then(dir => dirs = dir).catch(err => console.log(err));
-    var fileNames = [];
-    var splits = dirs.split('/');
-    for (i in dirs.length) {
-        fileNames.append(splits.at(-1));
+    // dialog(config).then(dir => console.log(dir)).catch(err => console.log(err));
+    await dialog(config).then(dir => dirs = dir).catch(err => console.log(err));
+    console.log(dirs)
+    for (var i = 0; i < dirs.length; i++) {
+        var splits = dirs[i].split('/')
+        console.log(splits)
+        selectedExe.push(splits[splits.length - 1]);
     }
-    console.log(fileNames);
+    console.log(selectedExe)
 }
