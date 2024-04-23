@@ -7,7 +7,7 @@ function updateTimerDisplay(timerValue) {
 function startTimer() {
     let seconds = timerValue;
     setInterval(() => {
-        seconds--;
+        seconds++;
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
         const formattedSeconds = seconds % 60;
