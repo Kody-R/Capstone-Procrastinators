@@ -8,6 +8,20 @@ html, body {
     height: 100vh;
 }
 
+.hidden {
+    display: none;
+}
+
+#alertBox {
+    border: 1px solid red;
+    background-color: lightpink;
+    color: red;
+    padding: 5px;
+    margin-top: 5px;
+    position: absolute;  /* Adjust positioning as needed */
+    width: 200px;        /* Adjust width as needed */
+}
+
 .mobile-select {
     display: flex;
     flex-direction: row;

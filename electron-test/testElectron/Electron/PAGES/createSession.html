@@ -22,33 +22,19 @@
     </div>
     <div class="centerDiv">
       <input id="webSelect" placeholder="Enter Website to Block">
-    </div>
+
     <div class="centerDiv">
-      <select id="timeSelect" name="times">
-        <option value="30">30 Minutes</option>
-        <option value="60">1 Hour</option>
-        <option value="90">1 hour 30 Minutes</option>
-    </select>
+        <select id="timeSelect" name="times">
+            <option value="30">30 Minutes</option>
+            <option value="60">1 Hour</option>
+            <option value="90">1 hour 30 Minutes</option>
+        </select>
     </div>
-      <button id="sendSession" onclick="checkValidity()" class="continue">SendSession</button>
-  <script>
-    function isValidFullDomain(input) {
-        // Regular expression to match the correct format: https://example.com
-        const domainPattern = /^https:\/\/www\.[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+$/;
-        return domainPattern.test(input);
-    }
-    function checkValidity() {
-        const inputElement = document.getElementById("webSelect");
-        const inputValue = inputElement.value;
-        const isValid = isValidFullDomain(inputValue);
-        if (isValid) {
-            console.log('Valid full domain format.');
-        } else {
-            alert("Invalid full domain format. E.X. https://www.example.com");
-        }
-    }
-  </script>
+    <button id="sendSession" class="continue">SendSession</button>
   </div>
+  <div id="alertBox" class="hidden">
+    Invalid full domain format. E.X. https://www.example.com
+</div>
 </body>
 <script src="../Renderers/sessionCreation.js"></script>
 </html>
