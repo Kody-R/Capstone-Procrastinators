@@ -154,6 +154,10 @@ function SendSessionData(event, session){
 }
 
 function RunAppKiller(session){
+    for(i = 0; i < selectedExe.length; i++){
+        session.apps += selectedExe[i] + " "
+    }
+    console.log("Session apps: " + session.apps.toString());
     const javaAppKiller = spawn('java', ['AppKiller.java', session.apps]);
     console.log("Application Killer started");
 }
