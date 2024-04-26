@@ -1,4 +1,4 @@
-export const session = {
+const session = {
     'time': null,
     'website': []
 };
@@ -22,17 +22,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (timeSelect) {
         timeSelect.addEventListener('input', function() {
             session.time = timeSelect.value * 60000;
-            console.log(session);
-            const sessionTime = session.time; // Declare sessionTime here
-            console.log(sessionTime);
-            sessionStorage.setItem('timerLength', sessionTime);
+            console.log(session.time);
+            sessionStorage.setItem('timerLength', session.time);
         });
     }
 
     if (websiteSelect) {
         websiteSelect.addEventListener('input', function() {
             session.website = websiteSelect.value;
-            console.log(session);
+            console.log(session.website);
+            sessionStorage.setitem('websiteList', session.website);
         });
     }
 });

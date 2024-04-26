@@ -1,5 +1,4 @@
 let timerInterval; // Define a variable to hold the interval
-import { session } from './sessionCreation.js';
 
 // Function to update the timer display
 function updateTimerDisplay(timerValue) {
@@ -11,7 +10,8 @@ function updateGoalDisplay(goalValue) {
     document.getElementById('endGoalTime').textContent = goalValue;
 }
 
-const sessionTime = sessionStorage.getItem('timerLength');
+var sessionTime = sessionStorage.getItem('timerLength');
+var sessionWebsite = sessionStorage.getItem('websiteList');
 
 // Function to start the timer
 function startTimer() {
@@ -38,17 +38,17 @@ function startTimer() {
                 const timerValue = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${formattedSeconds.toString().padStart(2, '0')}`;
                 updateTimerDisplay(timerValue);
             }, 1000); // Update the timer every second
- // Update the timer every second
         } else {
             console.error("Timer Value is null!")  
     }
 }
 
-startTimer();
-
-setTimeout(() => {
+setTimeout(async () => {
     clearInterval(timerInterval);
     console.log("Interval cleared");
-    session.website = [];
-    session.time = null;
+    sessionWebsite = [];
+    sessionTime = null;
+    await window.versions.completeSession();
 }, sessionTime);
+
+startTimer();
