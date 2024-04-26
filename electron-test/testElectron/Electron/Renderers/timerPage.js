@@ -49,6 +49,7 @@ setTimeout(async () => {
     sessionWebsite = [];
     sessionTime = null;
     await window.versions.completeSession();
+    history.go(-2);
 }, sessionTime);
 
 startTimer();
