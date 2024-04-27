@@ -117,7 +117,7 @@ function goToCreateSession(){
 }
 
 function goToSessionSelection(){
-    mainWindow.loadFile('./PAGES/sessionSelection.html')
+    mainWindow.loadFile('./PAGES/lastSession.html')
 }
 
 function getInput(event, value){

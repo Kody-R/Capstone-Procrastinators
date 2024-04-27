@@ -12,15 +12,19 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css"></link>
-    <title>Welcome</title>
+    <title>Previous Session</title>
 </head>
 <body class="background">
-  <div class="top-panel">
-    <ul class="top-list-items-container">
-      <div class="top-list-item"><a href="lastSession.html">Previoius Session</a></div>
-      <div class="top-list-item"><a href="createSession.html">Create Session</a></div>
-    </ul>
+  <div class="centerDiv">
+    <p class="title-text">Previous Session Configuration<br></p>
+    <div class="centerDiv">
+      <p id="prevWebSelect"> blank </p>
+
+    <div class="centerDiv">
+        <p id="prevTime"> 0 </p>
+    </div>
+    <button id="sendPrevSession" class="continue">SendSession</button>
   </div>
+  <script type="module" src="../Renderers/sessionPrevStart.js"></script>
 </body>
-<script src="../Renderers/welcomePage.js"></script>
 </html>

@@ -1,6 +1,6 @@
 const session = {
     'time': null,
-    'website': []
+    'website': null
 };
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             session.time = timeSelect.value * 60000;
             console.log(session.time);
             sessionStorage.setItem('timerLength', session.time);
+            localStorage.setItem('prevTimer', session.time);
         });
     }
 
@@ -31,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
         websiteSelect.addEventListener('input', function() {
             session.website = websiteSelect.value;
             console.log(session.website);
-            sessionStorage.setitem('websiteList', session.website);
+            sessionStorage.setItem('websiteList', session.website);
+            localStorage.setItem('prevWebsiteList', session.website);
         });
     }
 });
