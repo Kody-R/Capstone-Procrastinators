@@ -76,30 +76,6 @@ html, body {
     }
 }
 
-.top-panel {
-    background-color: #3e013e;
-    width: 100%;
-    height: 10%;
-    border-radius: 0px 0px 10px 10px;
-    display: flex;
-    justify-content:center;
-}
-
-.top-list-items-container {
-    display: flex;
-    flex-direction: row;
-}
-
-.top-list-item{
-    padding: 0px 30px 0px 30px;
-}
-
-a{
-    color: gold;
-    text-decoration: none;
-    font-family: "Lucida Console";
-}
-
 .mainBody{
     display: flex;
     flex-direction: column;
@@ -123,10 +99,7 @@ a{
     background-size: cover;
     background-position: center;
     position: relative;
-    overflow: hidden;
-
-
-    
+    overflow: hidden; 
 }
 
 *{
@@ -138,7 +111,6 @@ a{
 .bubbles img {
     width: 50px;
     animation: bubble 7s linear infinite;
-    
 }
 .bubbles{
     width: 100%;
@@ -205,7 +177,7 @@ a{
     
 }
 
-nav .logo p{
+.nav {
     font-size: 30px;
     font-weight: bold;
     float: left;
@@ -213,28 +185,35 @@ nav .logo p{
     text-transform: uppercase;
     letter-spacing: 1.5px; 
     cursor: pointer;
+    width: 100%;
+    height: 10%;
+    border-radius: 0px 0px 10px 10px;
+    display: flex;
+    justify-content:center;
 }
-nav ul {
+.nav ul {
     list-style: none;
     margin:0;
     padding:0;
+    display: flex;
+    flex-direction: row;
 }
 
-nav li {
+.nav ul li {
     display: inline-block;
     margin-right: 20px;
 }
 
-nav li a {
+.nav ul li a {
     font-size: 18px;
     text-transform: uppercase;
-    padding: 0px 30px;
-    color: whitesmoke;
+    color: rgba(31, 110, 86, 0.979);
     text-decoration: none;
+    padding: 0px 30px 0px 30px;
 }
 
 nav li a:hover {
-    color: gold;
+    color: white;
     transition: all 0.4s ease 0s;
 }
 
