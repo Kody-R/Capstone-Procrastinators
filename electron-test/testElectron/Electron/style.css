@@ -39,6 +39,7 @@ html, body {
     position: relative;
     text-align: center;
     font-size: 40px;
+    width: 100%;
 }
 
 .smaller-title-text {
@@ -329,4 +330,10 @@ nav li a:hover {
     to {transform: translateY(0px);
         opacity: 1;
     }
+
+.split{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
 }
