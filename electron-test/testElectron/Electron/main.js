@@ -5,6 +5,7 @@ const http = require("http")
 const { spawn } = require('child_process');
 const host = 'localhost'
 const port = '8000'
+var javaAppKiller;
 var webServer;
 server = null;
 wss = null;
@@ -156,11 +157,13 @@ function completeSession(event){
     session.time = null;
     session.website = null
     ws2.send(JSON.stringify(session));
+    javaAppKiller.kill();
+    javaAppKiller = null;
     console.log("Message sent")
 }
 
 function RunAppKiller(session){
-    const javaAppKiller = spawn('java', ['AppKiller.java', session.apps]);
+    javaAppKiller = spawn('java', ['AppKiller.java', session.apps]);
     console.log("Application Killer started");
 }
 
