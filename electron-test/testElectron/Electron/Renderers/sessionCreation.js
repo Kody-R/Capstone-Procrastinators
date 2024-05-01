@@ -53,7 +53,7 @@ function GetAppsToBlock(){
 
     // Log selected applications
     let appsToBlock = ""
-    for(i = 0; i < selectedApplications.length; i ++){
+    for(let i = 0; i < selectedApplications.length; i++){
         appsToBlock += selectedApplications[i] + " "
     }
     console.log(appsToBlock)
@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
     generateApplicationOptions();
     if (sendSession) {
         sendSession.addEventListener('click', async () => {
+            GetAppsToBlock();
             if (checkValidity()) {
                 localStorage.setItem('prevApps', session.apps);
                 await window.versions.SendSessionData(session);
