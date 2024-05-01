@@ -1,13 +1,14 @@
 const session = {
     'time': null,
-    'website': null
+    'website': null,
+    'apps': null
 };
 
 document.addEventListener('DOMContentLoaded', function() {
     const timeSelect = document.getElementById('prevTime');
     const websiteSelect = document.getElementById('prevWebSelect');
     const sendSession = document.getElementById('sendPrevSession');
-
+    const prevApps = document.getElementById('prevApps');
     if (sendSession) {
         sendSession.addEventListener('click', async () => {
             if (checkValidity()) {
@@ -28,6 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
     session.website = prevWebsites;
     websiteSelect.textContent = prevWebsites;
     console.log(prevWebsites);
+
+    const prevApplications = localStorage.getItem('prevApps');
+    session.apps = prevApplications;
+    prevApps.textContent = prevApplications;
 });
 
 function isValidFullDomain(input) {

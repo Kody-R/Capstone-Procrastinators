@@ -24,17 +24,6 @@ const applicationOptions = [
 
 let selectedApplications = ['msedge.exe','firefox.exe','opera.exe'];
 
-const timeSelect = document.getElementById('timeSelect');
-const websiteSelect = document.getElementById('webSelect');
-const sendSession = document.getElementById('sendSession');
-const fileDialog = document.getElementById('openFileDialog');
-
-timeSelect.addEventListener('input', getInputTimeValue);
-websiteSelect.addEventListener('input', getInputValue);
-sendSession.addEventListener('click', SendSessionData);
-//fileDialog.addEventListener('click', getFilePaths);
-generateApplicationOptions();
-
 
 function GetAppsToBlock(){
     const checkboxes = document.querySelectorAll('input[name="applicationOption"]');
@@ -77,9 +66,15 @@ function getInputTimeValue(e) {
     updateSessionList();
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const timeSelect = document.getElementById('timeSelect');
+    const websiteSelect = document.getElementById('webSelect');
+    const sendSession = document.getElementById('sendSession');
+    generateApplicationOptions();
     if (sendSession) {
         sendSession.addEventListener('click', async () => {
             if (checkValidity()) {
+                localStorage.setItem('prevApps', session.apps);
                 await window.versions.SendSessionData(session);
             } else {
                 document.getElementById('alertBox').classList.remove('hidden');
@@ -137,11 +132,6 @@ function checkValidity() {
         return false;
     }
 }
-
-fs.writeFile('C:\mySaveFile.txt', sessionList, function (err) {
-  if (err) throw err;
-  console.log('Saved!');
-}); 
 
 function getFilePaths() {
     const config = {

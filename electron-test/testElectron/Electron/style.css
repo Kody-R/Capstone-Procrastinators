@@ -330,10 +330,11 @@ nav li a:hover {
     to {transform: translateY(0px);
         opacity: 1;
     }
-
+}
 .split{
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
 }
+
