@@ -77,11 +77,35 @@ function getInputTimeValue(e) {
     updateSessionList();
 }
 
-function getInputValue(e) {
-    session.website = e.target.value;
-    console.log(session);
-    updateSessionList();
-}
+    if (sendSession) {
+        sendSession.addEventListener('click', async () => {
+            if (checkValidity()) {
+                await window.versions.SendSessionData(session);
+            } else {
+                document.getElementById('alertBox').classList.remove('hidden');
+                document.getElementById('webSelect').value = null;
+            }
+        });
+    }
+
+    if (timeSelect) {
+        timeSelect.addEventListener('input', function() {
+            session.time = timeSelect.value * 60000;
+            console.log(session.time);
+            sessionStorage.setItem('timerLength', session.time);
+            localStorage.setItem('prevTimer', session.time);
+        });
+    }
+
+    if (websiteSelect) {
+        websiteSelect.addEventListener('input', function() {
+            session.website = websiteSelect.value;
+            console.log(session.website);
+            sessionStorage.setItem('websiteList', session.website);
+            localStorage.setItem('prevWebsiteList', session.website);
+        });
+    }
+});
 
 function updateSessionList() {
     const sessionList = {
@@ -89,17 +113,30 @@ function updateSessionList() {
         'pSessionT': session.time
     };
     console.log(sessionList);
+    localStorage.setItem('settings', JSON.stringify(sessionList));
+    console.log('Settings saved!');
 }
 
-async function SendSessionData() {
-    GetAppsToBlock();
-    if(session.time == null){
-        session.time = 1800000;
+function isValidFullDomain(input) {
+    // Regular expression to match the correct format: https://www.example.com
+    const domainPattern = /^https:\/\/www\.[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+$/;
+    const partialDomains = input.split(',').map(domain => domain.trim());
+    const results = partialDomains.map(domain => domainPattern.test(domain));
+    return !results.includes(false);
+}
+
+function checkValidity() {
+    const inputElement = document.getElementById('webSelect');
+    const inputValue = inputElement.value;
+    const isValid = isValidFullDomain(inputValue);
+    if (isValid || inputValue == null) {
+        console.log('Valid full domain format.');
+        return true;
+    } else {
+        console.log('Invalid full domain format');
+        return false;
     }
-    await window.versions.SendSessionData(session);
 }
-
-var fs = require('fs');
 
 fs.writeFile('C:\mySaveFile.txt', sessionList, function (err) {
   if (err) throw err;

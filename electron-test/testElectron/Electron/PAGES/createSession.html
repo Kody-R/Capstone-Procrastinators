@@ -17,30 +17,26 @@
 <body class="background">
   <div class="centerDiv">
     <p class="title-text">Create Session! <br></p>
-    <div class="split">
-      <div class="splited">
-        <div class="centerDiv">
-          <label for="times">Enter websites urls to block:</label>
-        </div>
-        <div class="centerDiv">
-          <input id="webSelect" placeholder="Enter Website to Block">
-        </div>
-        <div class="centerDiv">
-          <select id="timeSelect" name="times">
-            <option value="0">Select Time</option>
+    <div class="centerDiv">
+      <label for="times">Choose time limit:</label>
+    </div>
+    <div class="centerDiv">
+      <input id="webSelect" placeholder="Enter Website to Block">
+
+    <div class="centerDiv">
+        <select id="timeSelect" name="times">
+            <option value="0"> </option>
+            <option value="5">5 minutes</option>
             <option value="30">30 Minutes</option>
             <option value="60">1 Hour</option>
             <option value="90">1 hour 30 Minutes</option>
-          </select>
-        </div>
-      </div>
-      <div class="splited">
-        <div id="applicationOptions">
-        </div>
-      </div>
+        </select>
     </div>
     <button id="sendSession" class="continue">SendSession</button>
   </div>
+  <div id="alertBox" class="hidden">
+    Invalid full domain format. E.X. https://www.example.com
+</div>
 </body>
-<script src="../Renderers/sessionCreation.js"></script>
+<script type="module" src="../Renderers/sessionCreation.js"></script>
 </html>

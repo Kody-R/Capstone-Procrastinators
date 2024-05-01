@@ -12,5 +12,6 @@ contextBridge.exposeInMainWorld('versions', {
     installExtension: () => ipcRenderer.invoke('extension-install'),
     goToCreateSession: () => ipcRenderer.invoke('go-to-create-session'),
     goToSessionSelection: () => ipcRenderer.invoke('go-to-session-selection'),
-    SendSessionData: (session) => ipcRenderer.invoke('send-session-data', session)
+    SendSessionData: (session) => ipcRenderer.invoke('send-session-data', session),
+    completeSession: () => ipcRenderer.invoke('complete-session')
 })

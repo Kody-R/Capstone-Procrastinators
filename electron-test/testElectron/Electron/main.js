@@ -39,6 +39,7 @@ app.whenReady().then(() => {
     ipcMain.handle('go-to-create-session', goToCreateSession)
     ipcMain.handle('go-to-session-selection', goToSessionSelection)
     ipcMain.handle('send-session-data', SendSessionData)
+    ipcMain.handle('complete-session', completeSession)
     createWindow()
     app.on('activate', () => {
         if(BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -116,7 +117,7 @@ function goToCreateSession(){
 }
 
 function goToSessionSelection(){
-    mainWindow.loadFile('./PAGES/sessionSelection.html')
+    mainWindow.loadFile('./PAGES/lastSession.html')
 }
 
 function getInput(event, value){
@@ -148,6 +149,14 @@ function SendSessionData(event, session){
     console.log("Message sent")
     RunAppKiller(session);
     mainWindow.loadFile('./PAGES/blocked.html')
+}
+
+function completeSession(event){
+    this.server.getConnections(Connections)
+    session.time = null;
+    session.website = null
+    ws2.send(JSON.stringify(session));
+    console.log("Message sent")
 }
 
 function RunAppKiller(session){
