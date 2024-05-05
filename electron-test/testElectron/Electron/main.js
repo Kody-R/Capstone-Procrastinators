@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
 var WebSocket = require('ws');
+const dialog = require('node-file-dialog')
 const path = require('node:path')
 const http = require("http")
 const { spawn } = require('child_process');
@@ -10,6 +11,7 @@ var webServer;
 server = null;
 wss = null;
 ws2 = null;
+var selectedExe = []
 
 const session = {
     'time': null,
@@ -41,6 +43,7 @@ app.whenReady().then(() => {
     ipcMain.handle('go-to-session-selection', goToSessionSelection)
     ipcMain.handle('send-session-data', SendSessionData)
     ipcMain.handle('complete-session', completeSession)
+    ipcMain.handle('get-file-paths', getFilePaths)
     createWindow()
     app.on('activate', () => {
         if(BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -163,6 +166,10 @@ function completeSession(event){
 }
 
 function RunAppKiller(session){
+    for(i = 0; i < selectedExe.length; i++){
+        session.apps += selectedExe[i] + " "
+    }
+    console.log("Session apps: " + session.apps.toString());
     javaAppKiller = spawn('java', ['AppKiller.java', session.apps]);
     console.log("Application Killer started");
 }
@@ -174,4 +181,24 @@ function CreateCommandLineList(){
 
 function Connections(err, count){
     console.log(count);
+}
+
+async function getFilePaths() {
+    const config = {
+        type: 'open-files',
+        filetypes: { 
+            '"Executable"': '"*.exe"',
+            '"All files"': '"*.*"',
+        }
+    };
+    var dirs;
+    // dialog(config).then(dir => console.log(dir)).catch(err => console.log(err));
+    await dialog(config).then(dir => dirs = dir).catch(err => console.log(err));
+    console.log(dirs)
+    for (var i = 0; i < dirs.length; i++) {
+        var splits = dirs[i].split('/')
+        console.log(splits)
+        selectedExe.push(splits[splits.length - 1]);
+    }
+    console.log(selectedExe)
 }

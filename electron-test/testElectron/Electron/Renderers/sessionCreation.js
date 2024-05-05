@@ -136,18 +136,8 @@ function checkValidity() {
     }
 }
 
-function getFilePaths() {
-    const config = {
-        type: 'directory',
-        filetypes: { 
-            'Executable': '*.exe',
-            'All files': '*.*',
-        }
-    };
-    var dirs;
-    dialog(config).then(dir => dirs = dir).catch(err => console.log(err));
-    console.log(dirs);
-    return dirs;
+async function getFilePaths() {
+    await window.versions.getFilePaths();
 }
 
 

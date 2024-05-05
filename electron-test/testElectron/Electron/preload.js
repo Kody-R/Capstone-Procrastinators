@@ -12,6 +12,7 @@ contextBridge.exposeInMainWorld('versions', {
     installExtension: () => ipcRenderer.invoke('extension-install'),
     goToCreateSession: () => ipcRenderer.invoke('go-to-create-session'),
     goToSessionSelection: () => ipcRenderer.invoke('go-to-session-selection'),
+    getFilePaths: () => ipcRenderer.invoke('get-file-paths'),
     SendSessionData: (session) => ipcRenderer.invoke('send-session-data', session),
     completeSession: () => ipcRenderer.invoke('complete-session')
 })
