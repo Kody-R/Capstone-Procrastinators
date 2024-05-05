@@ -21,23 +21,23 @@
       <label for="times">Choose time limit:</label>
     </div>
     <div class="centerDiv">
-      <input id="webSelect" placeholder="Enter Website to Block">
-
+      <select id="timeSelect" name="times">
+          <option value="0"> </option>
+          <option value="1">1 minute</option>
+          <option value="30">30 Minutes</option>
+          <option value="60">1 Hour</option>
+          <option value="90">1 hour 30 Minutes</option>
+      </select>
+  </div>
     <div class="centerDiv">
-        <select id="timeSelect" name="times">
-            <option value="0"> </option>
-            <option value="1">1 minute</option>
-            <option value="30">30 Minutes</option>
-            <option value="60">1 Hour</option>
-            <option value="90">1 hour 30 Minutes</option>
-        </select>
+      <input id="webSelect" placeholder="Enter Website to Block">
     </div>
-    <div class="splited">
+    <div class="split">
       <div id="applicationOptions">
-      </div>
+    </div>
   </div>
   <button id="openFileDialog" class="continue">Select Apps</button>
-    <button id="sendSession" class="continue">SendSession</button>
+  <button id="sendSession" class="continue">SendSession</button>
   </div>
   <div id="alertBox" class="hidden">
     Invalid full domain format. E.X. https://www.example.com
