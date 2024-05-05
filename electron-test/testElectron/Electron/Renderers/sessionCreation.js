@@ -70,6 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const timeSelect = document.getElementById('timeSelect');
     const websiteSelect = document.getElementById('webSelect');
     const sendSession = document.getElementById('sendSession');
+    const fileDialog = document.getElementById('openFileDialog');
+    fileDialog.addEventListener('click', getFilePaths);
     generateApplicationOptions();
     if (sendSession) {
         sendSession.addEventListener('click', async () => {
@@ -189,6 +191,7 @@ function generateApplicationOptions() {
     applicationOptionsDiv.appendChild(allLabel);
     applicationOptionsDiv.appendChild(document.createElement('br'));
 }
+
 
 // Call the function to generate checkboxes when the page loads
 
