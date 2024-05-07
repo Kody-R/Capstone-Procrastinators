@@ -344,3 +344,19 @@ nav li a:hover {
     width: 100%;
     justify-content: center;
 }
+
+.split-box-outer{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.split-box{
+    background-color: #05303b;
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+}
+
+.label-text{
+    color: rgb(141, 173, 185);
+}

@@ -119,6 +119,11 @@ function isValidFullDomain(input) {
     // Regular expression to match the correct format: https://www.example.com
     const domainPattern = /^https:\/\/www\.[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+$/;
     const partialDomains = input.split(',').map(domain => domain.trim());
+    const beginning = "https://www."
+    const end = ".com"
+    for(let i = 0; i < partialDomains.length; i++){
+        partialDomains[i] = beginning + partialDomains[i] + end;
+    }
     const results = partialDomains.map(domain => domainPattern.test(domain));
     return !results.includes(false);
 }
@@ -155,6 +160,7 @@ function generateApplicationOptions() {
 
         const label = document.createElement('label');
         label.textContent = option.label;
+        label.classList.add('label-text');
         applicationOptionsDiv.appendChild(label);
 
         applicationOptionsDiv.appendChild(document.createElement('br'));
@@ -175,6 +181,7 @@ function generateApplicationOptions() {
 
     const allLabel = document.createElement('label');
     allLabel.textContent = 'ALL';
+    allLabel.classList.add('label-text');
     allLabel.setAttribute('for', 'selectAllCheckbox');
 
     applicationOptionsDiv.appendChild(allCheckbox);
