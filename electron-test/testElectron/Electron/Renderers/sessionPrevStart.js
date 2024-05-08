@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Retrieve prevTimer from localStorage
     const prevTimer = localStorage.getItem('prevTimer');
     session.time = prevTimer;
-    timeSelect.textContent = ((prevTimer / 1000) % 3600) / 60 + " minutes";
+    const prevTime = ((prevTimer / 1000) % 3600) / 60
+    timeSelect.textContent = prevTime == 1 ? prevTime + " minute" : prevTime + " minutes";
 
     // Retrieve prevWebsiteList from localStorage
     const prevWebsites = localStorage.getItem('prevWebsiteList');
