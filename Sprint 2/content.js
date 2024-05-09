@@ -3,7 +3,8 @@
 //BLOCK WORDS
 findString = function findText(text) {
   if (typeof window !== "undefined") {
-    if(window.find(text)){
+    var current = window.location.href;
+    if(current.includes(text)){
       document.documentElement.innerHTML = '';
       document.documentElement.innerHTML = 'This site is blocked';
       document.documentElement.scrollTop = 0;
