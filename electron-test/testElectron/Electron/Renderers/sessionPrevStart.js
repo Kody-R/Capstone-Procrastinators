@@ -40,6 +40,11 @@ function isValidFullDomain(input) {
     // Regular expression to match the correct format: https://www.example.com
     const domainPattern = /^https:\/\/www\.[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+$/;
     const partialDomains = input.split(',').map(domain => domain.trim());
+    const beginning = "https://www."
+    const end = ".com"
+    for(let i = 0; i < partialDomains.length; i++){
+        partialDomains[i] = beginning + partialDomains[i] + end;
+    }
     const results = partialDomains.map(domain => domainPattern.test(domain));
     return !results.includes(false);
 }
