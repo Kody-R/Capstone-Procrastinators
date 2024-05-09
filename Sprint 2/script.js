@@ -1,19 +1,25 @@
 let blockList = new Array();
 socket = null;
+clicked = null;
 
-
-chrome.runtime.onInstalled.addListener(function() {
-  InitializeWebSocket();
-  setInterval(() => {
-    if (socket && socket.readyState !== WebSocket.OPEN) {
-      // WebSocket connection is not open, try to reconnect
-      console.log("Attempting to reconnect to WebSocket server");
-      InitializeWebSocket();
-    }
-  }, 5000);
-  setInterval(() => {
-    console.log(socket.readyState);
-  }, 5000);
+chrome.action.onClicked.addListener(function() {
+  if (clicked == null){
+    clicked = 0;
+    InitializeWebSocket();
+    setInterval(() => {
+      if (socket && socket.readyState !== WebSocket.OPEN) {
+        // WebSocket connection is not open, try to reconnect
+        console.log("Attempting to reconnect to WebSocket server");
+        InitializeWebSocket();
+      }
+    }, 5000);
+    setInterval(() => {
+      console.log(socket.readyState);
+    }, 5000);
+  } else {
+    console.log("nice try");
+  }
+  
 });
 
 
@@ -37,6 +43,7 @@ function InitializeWebSocket(){
   
   socket.onclose = function(event) {
     InitializeWebSocket();
+    clicked = null;
     blockList = [];
     portFromCS.postMessage({ greeting: blockList });
   };
