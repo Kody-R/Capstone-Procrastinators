@@ -37,10 +37,12 @@ function InitializeWebSocket(){
   
   socket.onclose = function(event) {
     InitializeWebSocket();
+    blockList = [];
+    portFromCS.postMessage({ greeting: blockList });
   };
   chrome.runtime.onConnect.addListener(connected);
   } catch(error){
-    console.error("No extension to connect to", error.message);
+    console.log("No extension to connect to", error.message);
   }
   setInterval(() => {
     const ping = JSON.stringify("I'm still here...")
